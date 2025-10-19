@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王博 - 智能制造工程专业个人简历</title>
+    <!-- 外部资源 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
+    <!-- 自定义配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#7B61FF',
+                        accent: '#00CFFD',
+                        dark: '#0F172A',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+            .bg-glass {
+                backdrop-filter: blur(12px);
+                background: rgba(255, 255, 255, 0.08);
+            }
+            .card-flip {
+                perspective: 1000px;
+            }
+            .card-inner {
+                transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                transform-style: preserve-3d;
+            }
+            .card-front, .card-back {
+                backface-visibility: hidden;
+            }
+            .card-back {
+                transform: rotateY(180deg);
+            }
+            .card-flip:hover .card-inner {
+                transform: rotateY(180deg);
+            }
+            .animate-float {
+                animation: float 6s ease-in-out infinite;
+            }
+            @keyframes float {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-15px); }
+                100% { transform: translateY(0px); }
+            }
+            .animate-fade-in {
+                animation: fadeIn 0.8s ease-out forwards;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        }
+    </style>
+    
+    <!-- 字体引入 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-dark text-light min-h-screen overflow-x-hidden">
+    <!-- 粒子背景 -->
+    <div id="particles-js" class="fixed inset-0 z-0 opacity-30"></div>
+    
+    <!-- 导航栏 -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-500" id="navbar">
+        <div class="container mx-auto px-4 md:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#home" class="text-2xl font-display font-bold flex items-center gap-2 group">
+                    <span class="w-10 h-10 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white">
+                        <i class="fa fa-user"></i>
+                    </span>
+                    <span class="text-white group-hover:text-primary transition-colors">王博</span>
+                </a>
+                
+                <!-- 桌面导航 -->
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="text-white/80 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all">首页</a>
+                    <a href="#education" class="text-white/80 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all">教育背景</a>
+                    <a href="#internship" class="text-white/80 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all">实习经历</a>
+                    <a href="#competition" class="text-white/80 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all">竞赛经历</a>
+                    <a href="#skills" class="text-white/80 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all">技能证书</a>
+                </nav>
+                
+                <!-- 移动端菜单按钮 -->
+                <button id="menuBtn" class="md:hidden text-white text-2xl focus:outline-none">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- 移动端菜单 -->
+            <div id="mobileMenu" class="md:hidden hidden mt-6 bg-glass rounded-xl p-5 border border-white/10 animate-fade-in">
+                <div class="flex flex-col gap-4">
+                    <a href="#home" class="text-white/80 hover:text-primary transition-colors py-2 border-b border-white/5">首页</a>
+                    <a href="#education" class="text-white/80 hover:text-primary transition-colors py-2 border-b border-white/5">教育背景</a>
+                    <a href="#internship" class="text-white/80 hover:text-primary transition-colors py-2 border-b border-white/5">实习经历</a>
+                    <a href="#competition" class="text-white/80 hover:text-primary transition-colors py-2 border-b border-white/5">竞赛经历</a>
+                    <a href="#skills" class="text-white/80 hover:text-primary transition-colors py-2">技能证书</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 首页Hero区域 -->
+    <section id="home" class="pt-40 pb-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark/95 to-dark/90 z-0"></div>
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent blur-3xl z-0"></div>
+        
+        <div class="container mx-auto px-4 md:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <!-- 个人信息 -->
+                <div class="lg:w-1/2 space-y-8 animate-fade-in" style="animation-delay: 0.2s">
+                    <div>
+                        <h4 class="text-accent font-medium mb-2 tracking-wider">智能制造工程专业 · 本科生</h4>
+                        <h1 class="text-[clamp(2.5rem,6vw,4.5rem)] font-display font-bold leading-tight">
+                            <span class="bg-gradient-to-r from-primary to-secondary text-gradient">王博</span>
+                            <span class="block mt-2">追求卓越的</span>
+                            <span class="bg-gradient-to-r from-accent to-secondary text-gradient">技术实践者</span>
+                        </h1>
+                    </div>
+                    
+                    <p class="text-white/70 text-lg max-w-lg leading-relaxed">
+                        专注智能制造与机械工程领域，具备工业机器人运维、智能识别系统开发及结构设计经验，
+                        曾获全国竞赛一等奖，持有高级工业机器人运维员及华为人工智能认证，追求技术与实践的深度融合。
+                    </p>
+                    
+                    <!-- 核心信息 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex items-center gap-3 text-white/80">
+                            <span class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                            <span>2004年2月 · 江苏邳州</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-white/80">
+                            <span class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                <i class="fa fa-flag"></i>
+                            </span>
+                            <span>群众</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-white/80">
+                            <span class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                <i class="fa fa-phone"></i>
+                            </span>
+                            <span>18965162979</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-white/80">
+                            <span class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                            <span>18965162979@163.com</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 头像区域 -->
+                <div class="lg:w-1/2 flex justify-center animate-float">
+                    <div class="relative w-72 h-72 md:w-96 md:h-96">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-primary to-secondary rounded-full opacity-30 blur-3xl"></div>
+                        <div class="absolute inset-4 bg-gradient-to-tr from-dark to-dark/80 rounded-full border border-white/10 flex items-center justify-center shadow-2xl">
+                            <i class="fa fa-cogs text-9xl md:text-10xl text-gradient bg-gradient-to-r from-primary to-secondary"></i>
+                        </div>
+                        <!-- 装饰环 -->
+                        <div class="absolute inset-0 border-2 border-dashed border-primary/30 rounded-full animate-spin" style="animation-duration: 20s"></div>
+                        <div class="absolute -inset-4 border border-primary/10 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 教育背景区域 - 调整了底部间距 -->
+    <section id="education" class="py-24 pb-32 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark to-dark/95 z-0"></div>
+        <div class="container mx-auto px-4 md:px-8 relative z-10">
+            <div class="text-center mb-16 animate-fade-in">
+                <h4 class="text-accent font-medium mb-2 tracking-wider">学术历程</h4>
+                <h2 class="text-[clamp(2rem,5vw,3rem)] font-display font-bold mb-4">教育背景</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="card-flip">
+                    <div class="card-inner relative h-full">
+                        <!-- 卡片正面 -->
+                        <div class="card-front absolute w-full">
+                            <div class="bg-glass rounded-2xl p-8 border border-white/10 shadow-xl h-full">
+                                <div class="flex flex-col md:flex-row md:items-center gap-8">
+                                    <div class="md:w-1/3">
+                                        <div class="bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl p-6 text-center">
+                                            <div class="text-2xl font-display font-bold text-white mb-2">2022.07-至今</div>
+                                            <div class="text-white/60">本科在读</div>
+                                            <div class="mt-6 w-16 h-16 mx-auto bg-white/5 rounded-full flex items-center justify-center">
+                                                <i class="fa fa-graduation-cap text-2xl text-primary"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="md:w-2/3">
+                                        <h3 class="text-2xl font-display font-bold text-white mb-3">华侨大学</h3>
+                                        <p class="text-primary text-lg mb-6">智能制造工程专业 | 中央统战部直属高校</p>
+                                        
+                                        <div class="space-y-6">
+                                            <div>
+                                                <h4 class="text-white font-semibold mb-3 flex items-center gap-2">
+                                                    <i class="fa fa-book text-accent"></i>主修课程
+                                                </h4>
+                                                <div class="flex flex-wrap gap-3">
+                                                    <span class="bg-white/5 px-4 py-2 rounded-full text-sm text-white/80">工程制图</span>
+                                                    <span class="bg-white/5 px-4 py-2 rounded-full text-sm text-white/80">三维建模及应用</span>
+                                                    <span class="bg-white/5 px-4 py-2 rounded-full text-sm text-white/80">人工智能技术基础</span>
+                                                    <span class="bg-white/5 px-4 py-2 rounded-full text-sm text-white/80">机械原理与设计</span>
+                                                    <span class="bg-white/5 px-4 py-2 rounded-full text-sm text-white/80">Python程序设计</span>
+                                                    <span class="bg-white/5 px-4 py-2 rounded-full text-sm text-white/80">智能传感技术</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div>
+                                                <h4 class="text-white font-semibold mb-3 flex items-center gap-2">
+                                                    <i class="fa fa-trophy text-accent"></i>荣誉奖项
+                                                </h4>
+                                                <div class="bg-white/5 p-4 rounded-xl">
+                                                    <p class="text-white/80">2024-2025学年国家励志奖学金</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 卡片背面 -->
+                        <div class="card-back absolute w-full">
+                            <div class="bg-glass rounded-2xl p-8 border border-white/10 shadow-xl h-full">
+                                <h3 class="text-2xl font-display font-bold text-white mb-6 text-center">学术成果</h3>
+                                
+                                <div class="space-y-6">
+                                    <div class="bg-white/5 p-5 rounded-xl border border-white/5 hover:border-primary/30 transition-colors">
+                                        <h4 class="text-white font-semibold mb-2">智能设计项目</h4>
+                                        <p class="text-white/70 text-sm">
+                                            基于Python开发STP模型分析工具，实现三维模型特征提取与优化建议生成，
+                                            辅助CAD设计流程效率提升30%，获课程优秀项目称号。
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="bg-white/5 p-5 rounded-xl border border-white/5 hover:border-primary/30 transition-colors">
+                                        <h4 class="text-white font-semibold mb-2">科研兴趣</h4>
+                                        <p class="text-white/70 text-sm">
+                                            专注于工业机器人智能化升级、机器视觉检测技术及智能装备结构优化方向，
+                                            计划深入研究工业4.0背景下的智能制造系统集成技术。
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="bg-gradient-to-r from-primary/20 to-secondary/20 p-5 rounded-xl mt-4">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fa fa-lightbulb-o text-accent text-xl"></i>
+                                            <p class="text-white/90">持续探索智能 manufacturing 与人工智能的交叉应用领域</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 实习经历区域 - 调整了顶部间距 -->
+    <section id="internship" class="py-32 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark/95 to-dark z-0"></div>
+        <div class="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-secondary/10 to-transparent blur-3xl z-0"></div>
+        
+        <div class="container mx-auto px-4 md:px-8 relative z-10">
+            <div class="text-center mb-16 animate-fade-in">
+                <h4 class="text-accent font-medium mb-2 tracking-wider">职业实践</h4>
+                <h2 class="text-[clamp(2rem,5vw,3rem)] font-display font-bold mb-4">实习经历</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- 睿云联科技 - 结构工程师 -->
+                <div class="card-hover bg-glass rounded-2xl p-8 border border-white/10 shadow-xl animate-fade-in" style="animation-delay: 0.2s">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h3 class="text-2xl font-display font-bold text-white">睿云联科技</h3>
+                            <p class="text-primary text-lg">结构工程师 | 2025.10-至今</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                            <i class="fa fa-cube text-white text-xl"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-5 text-white/70">
+                        <div class="flex gap-4">
+                            <div class="min-w-[24px] mt-1">
+                                <i class="fa fa-check-circle text-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">产品结构设计</h4>
+                                <p>负责智能终端设备结构设计，使用CREO完成3款产品的三维建模与装配，进行材料选型与强度校核，优化结构方案使产品重量减轻15%。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <div class="min-w-[24px] mt-1">
+                                <i class="fa fa-check-circle text-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">仿真与验证</h4>
+                                <p>通过ANSYS进行结构力学仿真分析，模拟跌落、振动等工况，解决2处潜在结构风险，提升产品可靠性测试通过率至98%。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <div class="min-w-[24px] mt-1">
+                                <i class="fa fa-check-circle text-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">生产协作</h4>
+                                <p>配合生产部门输出2D工程图纸与BOM清单，参与3次试产跟进，解决装配干涉问题5项，推动产品量产周期缩短10天。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 福建先进制造研究院 - 工业机器人应用 -->
+                <div class="card-hover bg-glass rounded-2xl p-8 border border-white/10 shadow-xl animate-fade-in" style="animation-delay: 0.4s">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h3 class="text-2xl font-display font-bold text-white">福建先进制造研究院</h3>
+                            <p class="text-primary text-lg">工业机器人应用实习 | 2025.08-2025.09</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                            <i class="fa fa-industry text-white text-xl"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-5 text-white/70">
+                        <div class="flex gap-4">
+                            <div class="min-w-[24px] mt-1">
+                                <i class="fa fa-check-circle text-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">虚拟仿真与编程</h4>
+                                <p>基于ABB RobotStudio搭建虚拟工作站，完成码垛与画线路径规划，编写离线程序并进行在线调试，程序执行效率提升20%。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <div class="min-w-[24px] mt-1">
+                                <i class="fa fa-check-circle text-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">机器人实操</h4>
+                                <p>操作ABB与KUKA机器人完成自动化码垛任务，通过示教器开发逻辑控制程序，独立完成设备安装、参数配置与故障排查。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <div class="min-w-[24px] mt-1">
+                                <i class="fa fa-check-circle text-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">技能认证</h4>
+                                <p>通过理论与实操考核，获得高级工业机器人系统运维员职业资格证书，具备工业机器人系统集成与维护能力。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 竞赛经历区域 -->
+    <section id="competition" class="py-24 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark to-dark/95 z-0"></div>
+        
+        <div class="container mx-auto px-4 md:px-8 relative z-10">
+            <div class="text-center mb-16 animate-fade-in">
+                <h4 class="text-accent font-medium mb-2 tracking-wider">创新成就</h4>
+                <h2 class="text-[clamp(2rem,5vw,3rem)] font-display font-bold mb-4">竞赛经历</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+            </div>
+            
+            <!-- 时间轴布局 -->
+            <div class="max-w-5xl mx-auto relative">
+                <!-- 时间轴线 -->
+                <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-secondary to-accent transform md:-translate-x-1/2"></div>
+                
+                <!-- 竞赛1：全国大学生工程实践大赛 -->
+                <div class="relative flex flex-col md:flex-row mb-16">
+                    <div class="md:w-1/2 md:pr-12 md:text-right mb-8 md:mb-0">
+                        <div class="card-hover bg-glass p-6 rounded-xl border border-white/10 shadow-xl">
+                            <div class="text-accent font-medium">2024.8-2025.8</div>
+                            <h3 class="text-2xl font-display font-bold text-white mt-2 mb-1">全国大学生工程实践与创新能力大赛</h3>
+                            <p class="text-primary font-semibold">全国一等奖</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 时间轴点 -->
+                    <div class="absolute left-0 md:left-1/2 w-6 h-6 bg-gradient-to-r from-primary to-secondary rounded-full transform -translate-x-1/2 z-10 shadow-lg shadow-primary/30"></div>
+                    
+                    <div class="md:w-1/2 md:pl-12">
+                        <div class="card-hover bg-glass p-6 rounded-xl border border-white/10 shadow-xl">
+                            <ul class="space-y-4 text-white/70">
+                                <li class="flex items-start gap-3">
+                                    <span class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary flex-shrink-0 mt-0.5">
+                                        <i class="fa fa-camera"></i>
+                                    </span>
+                                    <span>通过OpenCV调用USB工业相机（1920×1080）实现垃圾图像实时采集，编写高斯滤波与自适应阈值分割算法，有效去除背景干扰</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary flex-shrink-0 mt-0.5">
+                                        <i class="fa fa-code"></i>
+                                    </span>
+                                    <span>独立开发核心算法，解析YOLOv5模型输出结果，结合逻辑判断生成下位机控制指令，实现垃圾自动分类</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary flex-shrink-0 mt-0.5">
+                                        <i class="fa fa-database"></i>
+                                    </span>
+                                    <span>标注4000+张样本图片训练模型，最终各类垃圾识别准确率达95%，系统响应时间控制在200ms以内</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 竞赛2：逆向工程建模大赛 -->
+                <div class="relative flex flex-col md:flex-row">
+                    <div class="md:w-1/2 md:pr-12 md:text-right mb-8 md:mb-0 md:order-1 order-2">
+                        <div class="card-hover bg-glass p-6 rounded-xl border border-white/10 shadow-xl">
+                            <ul class="space-y-4 text-white/70">
+                                <li class="flex items-start gap-3 md:justify-end">
+                                    <span class="md:order-2">运用三维扫描仪获取复杂零件点云数据，经GDX软件降噪、封装处理，通过Bambu软件切片优化模型精度</span>
+                                    <span class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary flex-shrink-0 mt-0.5 md:order-1">
+                                        <i class="fa fa-scanner"></i>
+                                    </span>
+                                </li>
+                                <li class="flex items-start gap-3 md:justify-end">
+                                    <span class="md:order-2">通过CREO点云对齐功能精准定位数据，采用自适应采样保留98%关键特征点，模型与点云数据偏差≤0.03mm</span>
+                                    <span class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary flex-shrink-0 mt-0.5 md:order-1">
+                                        <i class="fa fa-cube"></i>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- 时间轴点 -->
+                    <div class="absolute left-0 md:left-1/2 w-6 h-6 bg-gradient-to-r from-primary to-secondary rounded-full transform -translate-x-1/2 z-10 shadow-lg shadow-primary/30"></div>
+                    
+                    <div class="md:w-1/2 md:pl-12 md:order-2 order-1">
+                        <div class="card-hover bg-glass p-6 rounded-xl border border-white/10 shadow-xl">
+                            <div class="text-accent font-medium">2024.04-2024.05</div>
+                            <h3 class="text-2xl font-display font-bold text-white mt-2 mb-1">第十七届"高教杯"逆向工程建模大赛</h3>
+                            <p class="text-primary font-semibold">省级优秀奖</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能证书区域 -->
+    <section id="skills" class="py-24 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark/95 to-dark z-0"></div>
+        <div class="absolute bottom-0 right-0 w-1/3 h-1/2 bg-gradient-to-tl from-primary/10 to-transparent blur-3xl z-0"></div>
+        
+        <div class="container mx-auto px-4 md:px-8 relative z-10">
+            <div class="text-center mb-16 animate-fade-in">
+                <h4 class="text-accent font-medium mb-2 tracking-wider">专业能力</h4>
+                <h2 class="text-[clamp(2rem,5vw,3rem)] font-display font-bold mb-4">技能与证书</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- 技能雷达图 -->
+                <div class="bg-glass rounded-2xl p-8 border border-white/10 shadow-xl animate-fade-in" style="animation-delay: 0.2s">
+                    <h3 class="text-2xl font-display font-bold text-white mb-8 text-center">技能熟练度</h3>
+                    <div class="w-full h-80">
+                        <canvas id="skillChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- 证书与软件技能 -->
+                <div class="space-y-8 animate-fade-in" style="animation-delay: 0.4s">
+                    <!-- 证书 -->
+                    <div class="bg-glass rounded-2xl p-8 border border-white/10 shadow-xl">
+                        <h3 class="text-2xl font-display font-bold text-white mb-6 flex items-center gap-2">
+                            <i class="fa fa-certificate text-accent"></i>
+                            <span>职业证书</span>
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+                                <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary flex-shrink-0">
+                                    <i class="fa fa-robot text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="text-white font-semibold">高级工业机器人系统运维员</div>
+                                    <div class="text-white/60 text-sm">工业和信息化部认证</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+                                <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary flex-shrink-0">
+                                    <i class="fa fa-microchip text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="text-white font-semibold">华为人工智能微认证</div>
+                                    <div class="text-white/60 text-sm">华为技术有限公司</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+                                <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary flex-shrink-0">
+                                    <i class="fa fa-language text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="text-white font-semibold">大学英语四级（CET-4）</div>
+                                    <div class="text-white/60 text-sm">良好的听说读写能力</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 软件技能 -->
+                    <div class="bg-glass rounded-2xl p-8 border border-white/10 shadow-xl">
+                        <h3 class="text-2xl font-display font-bold text-white mb-6 flex items-center gap-2">
+                            <i class="fa fa-desktop text-accent"></i>
+                            <span>专业工具</span>
+                        </h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <div class="bg-white/5 p-4 rounded-xl text-center hover:bg-white/10 transition-colors">
+                                <i class="fa fa-cad text-primary text-2xl mb-2"></i>
+                                <div class="text-white/80 text-sm">CAD</div>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-xl text-center hover:bg-white/10 transition-colors">
+                                <i class="fa fa-cube text-primary text-2xl mb-2"></i>
+                                <div class="text-white/80 text-sm">CREO</div>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-xl text-center hover:bg-white/10 transition-colors">
+                                <i class="fa fa-cogs text-primary text-2xl mb-2"></i>
+                                <div class="text-white/80 text-sm">SolidWorks</div>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-xl text-center hover:bg-white/10 transition-colors">
+                                <i class="fa fa-code text-primary text-2xl mb-2"></i>
+                                <div class="text-white/80 text-sm">Python</div>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-xl text-center hover:bg-white/10 transition-colors">
+                                <i class="fa fa-industry text-primary text-2xl mb-2"></i>
+                                <div class="text-white/80 text-sm">RobotStudio</div>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-xl text-center hover:bg-white/10 transition-colors">
+                                <i class="fa fa-eye text-primary text-2xl mb-2"></i>
+                                <div class="text-white/80 text-sm">YOLOv5/OpenCV</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-12 border-t border-white/10 relative z-10">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-display font-bold text-white mb-2 flex items-center gap-2 justify-center md:justify-start">
+                        <span class="w-8 h-8 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white text-sm">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        王博
+                    </h3>
+                    <p class="text-white/60 max-w-md">
+                        智能制造工程专业本科生，专注工业机器人与智能装备领域，
+                        期待以技术创新推动制造业智能化发展
+                    </p>
+                </div>
+                
+                <div class="flex gap-6">
+                    <a href="tel:18965162979" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-primary/20 hover:text-primary transition-all">
+                        <i class="fa fa-phone"></i>
+                    </a>
+                    <a href="mailto:18965162979@163.com" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-primary/20 hover:text-primary transition-all">
+                        <i class="fa fa-envelope"></i>
+                    </a>
+                    <a href="#home" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-primary/20 hover:text-primary transition-all">
+                        <i class="fa fa-arrow-up"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-white/5 text-center text-white/40 text-sm">
+                <p>© 2025 王博 个人简历 | 设计与开发：基于现代前端技术</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 粒子背景初始化
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#165DFF" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#165DFF",
+                    "opacity": 0.1,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 140, "line_linked": { "opacity": 0.3 } },
+                    "push": { "particles_nb": 4 }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-dark/90', 'backdrop-blur-md', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-dark/90', 'backdrop-blur-md', 'shadow-lg');
+            }
+        });
+
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = menuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // 关闭移动菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        const icon = menuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                    
+                    // 滚动到目标位置
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 技能雷达图
+        window.addEventListener('load', () => {
+            const ctx = document.getElementById('skillChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        '工业机器人运维',
+                        '结构设计(CAD/CREO)',
+                        '机器视觉技术',
+                        'Python编程',
+                        '逆向工程',
+                        '虚拟仿真'
+                    ],
+                    datasets: [{
+                        label: '技能熟练度',
+                        data: [90, 85, 82, 78, 80, 86],
+                        backgroundColor: 'rgba(22, 93, 255, 0.2)',
+                        borderColor: 'rgba(22, 93, 255, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#00CFFD',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#00CFFD',
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            pointLabels: {
+                                color: 'rgba(255, 255, 255, 0.8)',
+                                font: {
+                                    size: 12,
+                                    family: 'Inter'
+                                }
+                            },
+                            ticks: {
+                                backdropColor: 'transparent',
+                                color: 'rgba(255, 255, 255, 0.5)',
+                                z: 100
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section > div > div:not(.animate-fade-in)').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
